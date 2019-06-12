@@ -14,7 +14,7 @@ import javafx.scene.control.MenuButton;
 import java.util.Arrays;
 import java.util.List;
 
-public class CreateEventView{
+public class CreateEventView extends AView{
     @FXML
     public ChoiceBox organizations;
     public ChoiceBox users;
@@ -49,9 +49,9 @@ public class CreateEventView{
 //        rankingOfStayingPlaceItems.add("1");
 //        stayingPlaceRanking.setItems(rankingOfStayingPlaceItems);
         organizations.setItems(organizationsList);
-        organizationsList.add("Police");
+        organizationsList.add("POLICE");
         organizationsList.add("MDA");
-        organizationsList.add("Fire Department");
+        organizationsList.add("FIRE");
 //        connection2.setValue("");
 //        ticketType1.setItems(ticketTypeItems);
 //        ticketType2.setItems(ticketTypeItems);
@@ -116,32 +116,15 @@ public class CreateEventView{
 
 
     public boolean isAllFieldsFull() {
-//        if (sellAllTickets.getValue() == null ||
-//                stayingPlaceRanking.getValue() == null ||
-//                vacationType.getValue() == null ||
-//                ticketType1.getValue() == null ||
-//                departure_city.getText().equals("") ||
-//                departure_time_1.getText().equals("") ||
-//                destination_time_1.getText().equals("") ||
-//                airLineName_1.getText().equals("") ||
-//                flight_number_1.getText().equals("") ||
-//                flight_baggage_1.getText().equals("") ||
-//                destination_city.getText().equals("") ||
-//                price.getText().equals("") ||
-//                staying_place_name.getText().equals("") ||
-//                connection1.getValue() == null) {
-//            //alert("mandatory fields missing");
-//            return false;
-//        }
-//       if (flightBack.isSelected() && (departure_time_2.getText().equals("") ||
-//                destination_time_2.getText().equals("") ||
-//                airLineName_2.getText().equals("") ||
-//                flight_number_2.getText().equals("") ||
-//                flight_baggage_2.getText().equals("") ||
-//                (connection2.getValue() == null || connection2.getValue().toString().equals("")))){
-//           //alert("mandatory fields missing");
-//           return false;
-//        }
+
+        if (selectedItems.getItems().size() == 0 ||
+                users.getValue() == null ||
+                title.getText().equals("") ||
+                organizations.getValue()==null ||
+                firstUpdate.getText().equals("")) {
+            alert("all fields are required");
+            return false;
+        }
         return true;
     }
 

@@ -4,6 +4,7 @@ package Controllers;
 //import Model.TradeModel;
 //import Model.UserModel;
 //import Model.EventModel;
+import Model.User;
 import Model.UserModel;
 import Model.EventModel;
 import javafx.fxml.FXMLLoader;
@@ -18,8 +19,8 @@ public abstract class Controller {
 
     protected static MainController mainController;
     protected static UserModel userModel;
-    protected static EventModel vacationModel;
-
+    protected static EventModel eventModel;
+    protected static User currentUser;
     public Stage window = new Stage();
     Parent root = null;
     FXMLLoader fxmlLoader = new FXMLLoader();
@@ -30,7 +31,7 @@ public abstract class Controller {
     }
 
     public static void setMainEventModel (){
-        userModel = new UserModel();
+        eventModel = new EventModel();
     }
 
 

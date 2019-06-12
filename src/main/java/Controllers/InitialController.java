@@ -27,19 +27,20 @@ public class InitialController extends Controller {
         @Override
         public void handle(Event event) {
             initialView.invalidLoginLabel.setVisible(false);
-            if (initialView.checkFieldsEmpty() || userModel.login(initialView.usernameTextBox.getText(),initialView.passwordTextBox.getText()) == null)
+            User user = userModel.login(initialView.usernameTextBox.getText(),initialView.passwordTextBox.getText());
+            if (initialView.checkFieldsEmpty() || user == null)
             {
                 initialView.invalidLoginLabel.setVisible(true);
             }
             else
             {
+                currentUser = user;
                 mainController.activeSignInSuccessfuly();
                 initialView.usernameTextBox.setText("");
                 initialView.passwordTextBox.setText("");
                 window.close();
             }
-            //mainController.activeSignInSuccessfuly();
-            //window.close();
+
         }
     }
 

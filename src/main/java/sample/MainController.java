@@ -14,9 +14,9 @@ public class MainController {
     Stack<Controller> controllers = new Stack<Controller>();
     public MainController () {
         Controller.setMainController(this);
-        ButtonBack.setMainConroller(this);
         Controller.setMainUserModel();
         Controller.setMainEventModel();
+        ButtonBack.setMainConroller(this);
         initialController.start();
     }
 

@@ -6,7 +6,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import Model.User;
 
@@ -14,7 +16,7 @@ import Model.User;
 public class CreateEventController extends Controller {
     private CreateEventView createEventView;
     public CreateEventController(){
-        super("CreateVacation.fxml");
+        super("CreateEvent.fxml");
         createEventView = fxmlLoader.getController();
         createEventView.start(new ButtonCreateEvent(), new ChangeListener<Number>() {
             @Override
@@ -22,7 +24,15 @@ public class CreateEventController extends Controller {
                 String organization = createEventView.organizations.getItems().get((Integer) number2).toString();
                 List<User> organizationUsers = userModel.getAllUsersFromOrganization(organization);
                 System.out.println(organization);
-                createEventView.setUsersFromOrganization(getOrganizationUsersByName(organizationUsers));
+                if (organizationUsers!=null) createEventView.setUsersFromOrganization(getOrganizationUsersByName(organizationUsers));
+                else{
+                    List<String> organizationUsersByName = new ArrayList<>();
+                    organizationUsersByName.add("Mor");
+                    organizationUsersByName.add("Goni");
+                    organizationUsersByName.add("Itay");
+                    organizationUsersByName.add("Gal");
+                    createEventView.setUsersFromOrganization(organizationUsersByName);
+                }
             }
         });
 
@@ -49,8 +59,17 @@ public class CreateEventController extends Controller {
             for (int i=0; i<createEventView.selectedItems.getItems().size(); i++){
                 System.out.println(createEventView.selectedItems.getItems().get(i));
             }
-            window.close();
-            mainController.goBackToPreviousController();
+            if (createEventView.isAllFieldsFull()){
+                eventModel.insertEventToDB(createEventView.title.getText(),
+                        new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()).toString(),
+                        createEventView.firstUpdate.getText(),
+                        "open",
+                        "",
+                        createEventView.selectedItems.getItems());
+                window.close();
+                mainController.goBackToPreviousController();
+            }
+
         }
     }
 

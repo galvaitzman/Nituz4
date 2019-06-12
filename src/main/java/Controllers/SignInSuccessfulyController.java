@@ -16,7 +16,9 @@ public class SignInSuccessfulyController extends Controller {
     }
     @Override
     public void start() {
-
+        if (!currentUser.getorg_name().equals("DISPACH")){
+            signInSuccessfulyView.createEvent.setDisable(true);
+        }
         window.show();
 //        if (userModel.getCurrent_user().getUser_name().equals("")){
 //            signInSuccessfulyView.myVacations.setVisible(false);
