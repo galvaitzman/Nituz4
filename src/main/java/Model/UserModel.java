@@ -21,12 +21,12 @@ public class UserModel extends AModel {
         List<String> userDetails = new ArrayList<String>();
         try (Connection conn = this.connect();
              PreparedStatement statement = conn.prepareStatement(sql)){
-             statement.setString(1, user_name);
-             ResultSet rs = statement.executeQuery();
-             ResultSetMetaData rsmd = rs.getMetaData();
-             int colCount = rsmd.getColumnCount();
-             while (rs.next())
-             {
+            statement.setString(1, user_name);
+            ResultSet rs = statement.executeQuery();
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int colCount = rsmd.getColumnCount();
+            while (rs.next())
+            {
                 for (int col=1; col <= colCount; col++)
                 {
                     Object value = rs.getObject(col);
@@ -35,7 +35,7 @@ public class UserModel extends AModel {
                         userDetails.add(value.toString());
                     }
                 }
-             }
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

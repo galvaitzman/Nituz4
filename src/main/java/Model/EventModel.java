@@ -10,7 +10,7 @@ public class EventModel extends AModel {
     public void insertEventToDB(
             String title, String time, String initialUpdate, String status, String userName,List<String> categoriesList) {
         String post_type;
-     
+
         String sql_eventID = "SELECT max(eventID) FROM Events";
         int eventID = 0;
         try (Connection conn1 = connect();
