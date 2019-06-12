@@ -59,7 +59,7 @@ public class CreateEventController extends Controller {
 
             if (createEventView.isAllFieldsFull()){//new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()).toString(),
                 eventModel.insertEventToDB(createEventView.title.getText(),
-                        "date",
+                        new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z").format(Calendar.getInstance().getTime()),
                         createEventView.firstUpdate.getText(),
                         "open",
                         allCategories);//createEventView.selectedItems.getItems()
