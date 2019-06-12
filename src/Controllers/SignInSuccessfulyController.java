@@ -4,6 +4,8 @@ import Views.SignInSuccessfulyView;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 
+import java.awt.*;
+
 public class SignInSuccessfulyController extends Controller {
     SignInSuccessfulyView signInSuccessfulyView;
 
@@ -73,6 +75,7 @@ public class SignInSuccessfulyController extends Controller {
             window.close();
             window.setTitle("Vacation4U");
             mainController.activateCreateEvent();
+
         }
     }
 
