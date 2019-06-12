@@ -9,8 +9,8 @@ public class MainController {
     Controller currentController = initialController;
     Controller signInSuccessfulyController = new SignInSuccessfulyController();
     Controller createEventController = new CreateEventController();
-    //Controller addUpdateController = new AddUpdateController();
-    //Controller addSecurityForceController = new AddSecurityForce();
+    Controller addUpdateController = new AddUpdateController();
+    Controller addSecurityForceController = new AddSecurityForceController();
     Stack<Controller> controllers = new Stack<Controller>();
     public MainController () {
         Controller.setMainController(this);
@@ -34,13 +34,13 @@ public class MainController {
 
     public void activeAddUpdate(){
         controllers.push(currentController);
-        //currentController = addUpdateController;
+        currentController = addUpdateController;
         currentController.start();
     }
 
     public void activateAddSecurityForce(){
         controllers.push(currentController);
-        //currentController = addSecurityForceController;
+        currentController = addSecurityForceController;
         currentController.start();
     }
 
