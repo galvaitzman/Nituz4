@@ -58,7 +58,6 @@ public class UserModel extends AModel {
     public List<User> getAllUsersFromOrganization(String organization)
     {
         String sql = "SELECT * from Users where org_name = ?";
-        List<String> userDetails = new ArrayList<String>();
         List<User> userList = new ArrayList<User>();
         try (Connection conn = this.connect();
              PreparedStatement statement = conn.prepareStatement(sql)){
@@ -68,6 +67,7 @@ public class UserModel extends AModel {
             int colCount = rsmd.getColumnCount();
             while (rs.next())
             {
+                List<String> userDetails = new ArrayList<String>();
                 for (int col=1; col <= colCount; col++)
                 {
                     Object value = rs.getObject(col);
