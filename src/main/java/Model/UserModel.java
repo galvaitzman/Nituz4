@@ -83,7 +83,7 @@ public class UserModel extends AModel {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        if(!userDetails.isEmpty())
+        if(!userList.isEmpty())
             return userList;
         return null;
     }

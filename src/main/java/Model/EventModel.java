@@ -41,10 +41,13 @@ public class EventModel extends AModel {
             System.out.println(e.getMessage());
         }
 
+
+
+
         String sql2 = "INSERT INTO CategoriesInEvent(eventID," +
                 "cat_name) VALUES(?,?)";
-        try (Connection conn = connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql2)) {
+        try (Connection conn3 = connect();
+             PreparedStatement pstmt = conn3.prepareStatement(sql2)) {
             pstmt.setInt(1, eventID);
             pstmt.setString(2, "gg");
             pstmt.executeUpdate();
