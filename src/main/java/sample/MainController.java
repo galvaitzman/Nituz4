@@ -1,6 +1,8 @@
 package sample;
 import Controllers.*;
+import Model.EventModel;
 
+import java.util.List;
 import java.util.Stack;
 
 
@@ -21,6 +23,7 @@ public class MainController {
     }
 
     public void activeSignInSuccessfuly(){
+
         controllers.push(currentController);
         currentController = signInSuccessfulyController;
         currentController.start();

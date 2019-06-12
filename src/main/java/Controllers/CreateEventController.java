@@ -44,7 +44,7 @@ public class CreateEventController extends Controller {
     public void start() {
         createEventView.setOrganizations(eventModel.getAllOrganization());
         createEventView.setCategories(eventModel.getAllCategories());
-        window.setTitle("Create Vacation");
+        window.setTitle("Create Event");
         window.show();
     }
 
@@ -62,7 +62,9 @@ public class CreateEventController extends Controller {
                         new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z").format(Calendar.getInstance().getTime()),
                         createEventView.firstUpdate.getText(),
                         "open",
-                        allCategories);//createEventView.selectedItems.getItems()
+                        allCategories,
+                        createEventView.organizations.getValue().toString(),
+                        createEventView.users.getValue().toString());
                 window.close();
                 mainController.goBackToPreviousController();
             }

@@ -1,10 +1,12 @@
 package sample;
 
+import Model.EventModel;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 public class Main extends Application {
 

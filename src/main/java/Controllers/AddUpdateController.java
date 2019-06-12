@@ -1,6 +1,7 @@
 package Controllers;
 
 import Model.User;
+import Views.AddUpdateView;
 import Views.CreateEventView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -14,46 +15,25 @@ import java.util.List;
 
 
 public class AddUpdateController extends Controller {
-    private CreateEventView createEventView;
+    private AddUpdateView addUpdateView;
     public AddUpdateController(){
-        super("CreateEvent.fxml");
-        createEventView = fxmlLoader.getController();
-
-
-
-    }
-
-    private List<String> getOrganizationUsersByName(List<User>organizationUsers ){
-        List<String> organizationUsersByName = new ArrayList<>();
-        for (int i=0; i<organizationUsers.size(); i++){
-            organizationUsersByName.add(organizationUsers.get(i).getuserName());
-        }
-        return organizationUsersByName;
+        super("AddUpdate.fxml");
+        addUpdateView = fxmlLoader.getController();
     }
 
     @Override
     public void start() {
-        createEventView.setOrganizations(eventModel.getAllOrganization());
-        createEventView.setCategories(eventModel.getAllCategories());
-        window.setTitle("Create Vacation");
+        window.setTitle("Add update");
         window.show();
     }
 
 
-    public class ButtonCreateEvent implements EventHandler {
+    public class ButtonAddUpdate implements EventHandler {
         @Override
         public void handle(Event event) {
-            List<String>allCategories = new ArrayList<>();
-            for (int i=0; i<createEventView.selectedItems.getItems().size(); i++){
-                allCategories.add(createEventView.selectedItems.getItems().get(i));
-            }
 
-            if (createEventView.isAllFieldsFull()){//new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()).toString(),
-                eventModel.insertEventToDB(createEventView.title.getText(),
-                        new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z").format(Calendar.getInstance().getTime()),
-                        createEventView.firstUpdate.getText(),
-                        "open",
-                        allCategories);//createEventView.selectedItems.getItems()
+            if (addUpdateView.isAllFieldsFull()){
+
                 window.close();
                 mainController.goBackToPreviousController();
             }
