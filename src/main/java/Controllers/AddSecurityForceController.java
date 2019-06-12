@@ -52,7 +52,7 @@ public class AddSecurityForceController extends Controller {
                         new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z").format(Calendar.getInstance().getTime()),
                         createEventView.firstUpdate.getText(),
                         "open",
-                        allCategories);//createEventView.selectedItems.getItems()
+                        allCategories,"","");//createEventView.selectedItems.getItems()
                 window.close();
                 mainController.goBackToPreviousController();
             }
