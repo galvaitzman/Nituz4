@@ -11,6 +11,7 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,7 +34,6 @@ public class CreateEventView extends AView{
         createEvent.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, buttonCreateEvent);
         //ObservableList<String> sellAllTicketsItems = FXCollections.observableArrayList();
         //ObservableList<String> vacationTypeItems = FXCollections.observableArrayList();
-        ObservableList<String> organizationsList = FXCollections.observableArrayList();
         //ObservableList<String> ticketTypeItems = FXCollections.observableArrayList();
         //ObservableList<String> connectionItems = FXCollections.observableArrayList();
         //sellAllTicketsItems.add("Yes");
@@ -48,10 +48,7 @@ public class CreateEventView extends AView{
 //        rankingOfStayingPlaceItems.add("2");
 //        rankingOfStayingPlaceItems.add("1");
 //        stayingPlaceRanking.setItems(rankingOfStayingPlaceItems);
-        organizations.setItems(organizationsList);
-        organizationsList.add("POLICE");
-        organizationsList.add("MDA");
-        organizationsList.add("FIRE");
+
 //        connection2.setValue("");
 //        ticketType1.setItems(ticketTypeItems);
 //        ticketType2.setItems(ticketTypeItems);
@@ -80,16 +77,30 @@ public class CreateEventView extends AView{
 //        flight_number_2.setText("");
 //        flight_baggage_2.setText("");
 //        connection2.setValue("");
-        final List<CheckMenuItem> items = Arrays.asList(
-                new CheckMenuItem("Homicide"),
-                new CheckMenuItem("Robbery"),
-                new CheckMenuItem("Kidnapping"),
-                new CheckMenuItem("Car Accident"),
-                new CheckMenuItem("Fire"),
-                new CheckMenuItem("Medicine")
-        );
+
+//        staying_place_name.setText("none");
+//        stayingPlaceRanking.setValue("1");
+        back.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED,new ButtonBack());
+    }
+
+    public void setOrganizations(List<String> allOrganizations){
+        ObservableList<String> organizationsList = FXCollections.observableArrayList();
+        organizations.setItems(organizationsList);
+        for(int i=0; i<allOrganizations.size();i++){
+            if (!allOrganizations.get(i).equals("DISPACH")) {
+                organizationsList.add(allOrganizations.get(i));
+            }
+        }
+    }
+
+    public void setCategories(List<String> allCategories){
+        List<CheckMenuItem> items = new ArrayList<>();
+        for(int i=0; i<allCategories.size();i++){
+            items.add(new CheckMenuItem(allCategories.get(i)));
+        }
+
         Categories.getItems().addAll(items);
-        for (final CheckMenuItem item : items) {
+        for (CheckMenuItem item : items) {
             item.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
                 if (newValue) {
                     selectedItems.getItems().add(item.getText());
@@ -100,9 +111,6 @@ public class CreateEventView extends AView{
                 }
             });
         }
-//        staying_place_name.setText("none");
-//        stayingPlaceRanking.setValue("1");
-        back.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED,new ButtonBack());
     }
 
     public void setUsersFromOrganization(List<String> organizationUsersByName){

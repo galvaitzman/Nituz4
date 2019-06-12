@@ -12,7 +12,7 @@ public class UserModel extends AModel {
 
 
     public UserModel(){
-        current_user = new User();
+        //current_user = new User();
     }
 
     public User searchUserByUserName(String user_name){

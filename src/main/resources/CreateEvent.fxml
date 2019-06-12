@@ -14,6 +14,8 @@
 <?import javafx.scene.text.TextFlow?>
 <AnchorPane prefHeight="655.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.CreateEventView">
     <children>
+            <Button fx:id="back" mnemonicParsing="false" prefHeight="36.0" prefWidth="70.0" text="Back" layoutX="0" layoutY="0" />
+
             <Label layoutX="100.0" layoutY="25.0" text="Title" />
             <TextField fx:id="title" layoutX="200.0" layoutY="25.0" prefHeight="27.0" prefWidth="185.0" />
 
@@ -23,17 +25,19 @@
             <Label layoutX="100.0" layoutY="205.0" text="Categories:" />
             <MenuButton fx:id="Categories" layoutX="200.0" layoutY="205.0" prefHeight="25.0" prefWidth="104.0"/>
 
-            <Label layoutX="100.0" layoutY="265.0" text="Organization:" />
-            <ChoiceBox fx:id="organizations" layoutX="200.0" layoutY="265.0" prefHeight="25.0" prefWidth="104.0" />
+
+            <Label layoutX="100.0" layoutY="265.0" text="Choose organization and a user from the organization to report the event" />
+            <Label layoutX="100.0" layoutY="325.0" text="Organization:" />
+            <ChoiceBox fx:id="organizations" layoutX="200.0" layoutY="325.0" prefHeight="25.0" prefWidth="104.0" />
 
 
 
-            <Label layoutX="100.0" layoutY="325.0" text="Users:" />
-            <ChoiceBox fx:id="users" layoutX="200.0" layoutY="325.0" prefHeight="25.0" prefWidth="104.0" />
+            <Label layoutX="100.0" layoutY="385.0" text="Users:" />
+            <ChoiceBox fx:id="users" layoutX="200.0" layoutY="385.0" prefHeight="25.0" prefWidth="104.0" />
 
 
             <Button fx:id="createEvent" layoutX="400.0" layoutY="400.0" mnemonicParsing="false" text="Create Event" />
 
-            <Button fx:id="back" mnemonicParsing="false" prefHeight="36.0" prefWidth="70.0" text="Back" layoutX="0" layoutY="0" />
+
     </children>
 </AnchorPane>

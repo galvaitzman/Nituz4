@@ -1,5 +1,6 @@
 package Controllers;
 
+import Model.EventModel;
 import Views.CreateEventView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -25,16 +26,9 @@ public class CreateEventController extends Controller {
                 List<User> organizationUsers = userModel.getAllUsersFromOrganization(organization);
                 System.out.println(organization);
                 if (organizationUsers!=null) createEventView.setUsersFromOrganization(getOrganizationUsersByName(organizationUsers));
-                else{
-                    List<String> organizationUsersByName = new ArrayList<>();
-                    organizationUsersByName.add("Mor");
-                    organizationUsersByName.add("Goni");
-                    organizationUsersByName.add("Itay");
-                    organizationUsersByName.add("Gal");
-                    createEventView.setUsersFromOrganization(organizationUsersByName);
-                }
             }
         });
+
 
     }
 
@@ -48,6 +42,8 @@ public class CreateEventController extends Controller {
 
     @Override
     public void start() {
+        createEventView.setOrganizations(eventModel.getAllOrganization());
+        createEventView.setCategories(eventModel.getAllCategories());
         window.setTitle("Create Vacation");
         window.show();
     }
@@ -64,7 +60,6 @@ public class CreateEventController extends Controller {
                         new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()).toString(),
                         createEventView.firstUpdate.getText(),
                         "open",
-                        "",
                         createEventView.selectedItems.getItems());
                 window.close();
                 mainController.goBackToPreviousController();
