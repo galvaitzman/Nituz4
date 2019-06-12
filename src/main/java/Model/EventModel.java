@@ -60,6 +60,39 @@ public class EventModel extends AModel {
 
     }
 
+    public List<String> getAllEvents(){
+        String sql = "SELECT eventID,title from ManagersInEvents AS MIE INNER JOIN Events AS E ON MIE.eventID=E.eventID INNER JOIN Users AS U ON U.userName=MIE.reportTo WHERE U.rank<= CAST(? AS INTEGER) AND E.status='Open'";
+        List<String> eventList = new ArrayList<>();
+        try (Connection conn = this.connect();
+             PreparedStatement statement = conn.prepareStatement(sql)){
+            statement.setString(1, current_user.getrank());
+            ResultSet rs = statement.executeQuery();
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int colCount = rsmd.getColumnCount();
+            while (rs.next())
+            {
+                for (int col=1; col <= colCount; col++)
+                {
+                    Object value = rs.getObject(col);
+                    if (value != null)
+                    {
+                        eventList.add(value.toString());
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        if(!eventList.isEmpty())
+            return eventList;
+        return null;
+    }
+
+
+
+
+
+
 /*
     public boolean updateVacation(int eventID, String title, String time, String initialUpdate, String status, String userName, String destination_time_2,
                                   String flight_number_1, String flight_number_2, String flight_date_1, String flight_date_2, String flight_baggage_1, String flight_baggage_2,
