@@ -3,7 +3,7 @@ package Controllers;
 //import Model.OrdersModel;
 //import Model.TradeModel;
 //import Model.UserModel;
-//import Model.VacationModel;
+//import Model.EventModel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,7 +16,7 @@ public abstract class Controller {
 
     protected static MainController mainController;
 //    protected static UserModel userModel;
-//    protected static VacationModel vacationModel;
+//    protected static EventModel vacationModel;
 //    protected static OrdersModel ordersModel;
 //    protected static TradeModel tradeModel;
     public Stage window = new Stage();
@@ -31,7 +31,7 @@ public abstract class Controller {
         mainController = other;
     }
 //    public static void setMainOrderModel (){ordersModel = new OrdersModel(); }
-//    public static void setMainVacationModel (){ vacationModel = new VacationModel(); }
+//    public static void setMainVacationModel (){ vacationModel = new EventModel(); }
 //    public static void setMainTradeModel (){ tradeModel = new TradeModel(); }
 
     public abstract void start();

@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VacationModel extends AModel {
+public class EventModel extends AModel {
 
 
     public void insertEventToDB(
