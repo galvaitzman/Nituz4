@@ -8,8 +8,7 @@ public class EventModel extends AModel {
 
 
     public void insertEventToDB(
-            String title, String time, String initialUpdate, String status, String userName,List<String> categoriesList) {
-        String post_type;
+            String title, String time, String initialUpdate, String status,List<String> categoriesList) {
 
         String sql_eventID = "SELECT max(eventID) FROM Events";
         int eventID = 0;
@@ -36,11 +35,29 @@ public class EventModel extends AModel {
             pstmt.setString(3, time);
             pstmt.setString(4, initialUpdate);
             pstmt.setString(5, status);
-            pstmt.setString(6, userName);
+            pstmt.setString(6, current_user.getuserName());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
+
+
+        for( int i = 0; i <categoriesList.size();i = i + 1) {
+            String sql2 = "INSERT INTO CategoriesInEvent(eventID," +
+                    "cat_name) VALUES(?,?)";
+            try (Connection conn3 = connect();
+                 PreparedStatement pstmt = conn3.prepareStatement(sql2)) {
+                pstmt.setInt(1, eventID);
+                pstmt.setString(2, categoriesList.get(i));
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+
+
     }
 
 /*
