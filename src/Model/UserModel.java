@@ -46,7 +46,9 @@ public class UserModel extends AModel {
 
     public User login(String userName, String password){
         User searchResult = searchUserByUserName(userName);
-        
+
+        if(searchResult == null)
+            return null;
         if (!password.equals(searchResult.getpassword()))
             return null;
         current_user = searchResult;
