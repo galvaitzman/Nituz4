@@ -10,7 +10,6 @@ import java.sql.SQLException;
 
 public class UserModel extends AModel {
 
-    User current_user;
 
     public UserModel(){
         current_user = new User();

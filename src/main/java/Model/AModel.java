@@ -8,6 +8,8 @@ import java.util.List;
 
 public abstract class AModel {
 
+    User current_user;
+
     protected Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:avoda4DB.db";
