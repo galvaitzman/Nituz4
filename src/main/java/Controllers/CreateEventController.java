@@ -52,15 +52,17 @@ public class CreateEventController extends Controller {
     public class ButtonCreateEvent implements EventHandler {
         @Override
         public void handle(Event event) {
+            List<String>allCategories = new ArrayList<>();
             for (int i=0; i<createEventView.selectedItems.getItems().size(); i++){
-                System.out.println(createEventView.selectedItems.getItems().get(i));
+                allCategories.add(createEventView.selectedItems.getItems().get(i));
             }
-            if (createEventView.isAllFieldsFull()){
+
+            if (createEventView.isAllFieldsFull()){//new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()).toString(),
                 eventModel.insertEventToDB(createEventView.title.getText(),
-                        new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()).toString(),
+                        "date",
                         createEventView.firstUpdate.getText(),
                         "open",
-                        createEventView.selectedItems.getItems());
+                        allCategories);//createEventView.selectedItems.getItems()
                 window.close();
                 mainController.goBackToPreviousController();
             }
