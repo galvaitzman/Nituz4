@@ -46,7 +46,7 @@ public class EventModel extends AModel {
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql2)) {
             pstmt.setInt(1, eventID);
-            pstmt.setString(2, cat_nam);
+            pstmt.setString(2, "gg");
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
