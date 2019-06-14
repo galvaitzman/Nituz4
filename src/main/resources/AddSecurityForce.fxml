@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import javafx.scene.text.TextFlow?>
+<AnchorPane prefHeight="655.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.AddSecurityForceView">
+    <children>
+            <Button fx:id="back" mnemonicParsing="false" prefHeight="36.0" prefWidth="70.0" text="Back" layoutX="0" layoutY="0" />
+
+            <Label layoutX="100.0" layoutY="25.0" text="Choose Event:" />
+            <ChoiceBox fx:id="events" layoutX="250.0" layoutY="25.0" prefHeight="25.0" prefWidth="104.0" />
+
+            <Label layoutX="100.0" layoutY="85.0" text="Choose Organization:" />
+            <ChoiceBox fx:id="organizations" layoutX="250.0" layoutY="85.0" prefHeight="25.0" prefWidth="104.0" />
+
+            <Label layoutX="100.0" layoutY="145.0" text="Choose User:" />
+            <ChoiceBox fx:id="users" layoutX="250.0" layoutY="145.0" prefHeight="25.0" prefWidth="104.0" />
+
+            <Label layoutX="100.0" layoutY="205.0" text="information:" />
+            <TextArea fx:id="firstUpdate" layoutX="250.0" layoutY="205.0" prefHeight="100.0" prefWidth="185.0" />
+
+            <Button fx:id="addSecurityForce" layoutX="400.0" layoutY="400.0" mnemonicParsing="false" text="Add Security Force" />
+
+
+    </children>
+</AnchorPane>

@@ -57,7 +57,7 @@ public class CreateEventController extends Controller {
                 allCategories.add(createEventView.selectedItems.getItems().get(i));
             }
 
-            if (createEventView.isAllFieldsFull()){//new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()).toString(),
+            if (createEventView.isAllFieldsFull()){
                 eventModel.insertEventToDB(createEventView.title.getText(),
                         new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z").format(Calendar.getInstance().getTime()),
                         createEventView.firstUpdate.getText(),
@@ -67,6 +67,9 @@ public class CreateEventController extends Controller {
                         createEventView.users.getValue().toString());
                 window.close();
                 mainController.goBackToPreviousController();
+            }
+            else{
+                alert("all fields are required");
             }
 
         }

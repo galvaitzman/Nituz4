@@ -18,55 +18,15 @@ public class SignInSuccessfulyController extends Controller {
     public void start() {
         if (!currentUser.getorg_name().equals("DISPACH")){
             signInSuccessfulyView.createEvent.setDisable(true);
+            signInSuccessfulyView.addUpdate.setDisable(false);
         }
-        window.show();
-//        if (userModel.getCurrent_user().getUser_name().equals("")){
-//            signInSuccessfulyView.myVacations.setVisible(false);
-//            signInSuccessfulyView.manageMyUser.setVisible(false);
-//            signInSuccessfulyView.createNewVacation.setVisible(false);
-//        }
-//        else {
-//            signInSuccessfulyView.myVacations.setVisible(true);
-//            signInSuccessfulyView.manageMyUser.setVisible(true);
-//            signInSuccessfulyView.createNewVacation.setVisible(true);
-//        }
-//        if (ordersModel.getOrdersInCaseSeller("waiting for approval of purchase offer").size()>0 && !userModel.getCurrent_user().getUser_name().equals("")){
-//            signInSuccessfulyView.requestButton.setVisible(true);
-//            signInSuccessfulyView.alert("You have new purchase requests for your vacations");
-//        }
-//        else{
-//            signInSuccessfulyView.requestButton.setVisible(false);
-//        }
-//        if (ordersModel.getOrdersInCaseBuyer().size()>0 && !userModel.getCurrent_user().getUser_name().equals("")){
-//            signInSuccessfulyView.approvalButton.setVisible(true);
-//            signInSuccessfulyView.alert("You have new approvals for your vacation purchases requests");
-//        }
-//        else{
-//            signInSuccessfulyView.approvalButton.setVisible(false);
-//        }
-//        if (ordersModel.getOrdersInCaseSeller("waiting for payment").size()>0 && !userModel.getCurrent_user().getUser_name().equals("")){
-//            signInSuccessfulyView.moneyRecievedButton.setVisible(true);
-//            signInSuccessfulyView.alert("Please approve receiving the money for your vacation");
-//        }
-//        else{
-//            signInSuccessfulyView.moneyRecievedButton.setVisible(false);
-//        }
-//        if (tradeModel.getTradesInCaseSeller().size()>0 && !userModel.getCurrent_user().getUser_name().equals("")){
-//
-//            signInSuccessfulyView.tradeButton.setVisible(true);
-//            signInSuccessfulyView.alert("You have new requests for trade for your vacations");
-//        }
-//        else{
-//            signInSuccessfulyView.tradeButton.setVisible(false);
-//        }
-//        if (tradeModel.getTradesInCaseBuyer().size()>0 && !userModel.getCurrent_user().getUser_name().equals("")){
-//            signInSuccessfulyView.approvedfOrRejectedTradeButton.setVisible(true);
-//            signInSuccessfulyView.alert("You have new updates for your requests to trades");
-//        }
-//        else{
-//            signInSuccessfulyView.approvedfOrRejectedTradeButton.setVisible(false);
-//        }
+        else {
+            signInSuccessfulyView.createEvent.setDisable(false);
+            signInSuccessfulyView.addUpdate.setDisable(true);
+        }
 
+        window.show();
+//
 
 
     }
@@ -92,7 +52,6 @@ public class SignInSuccessfulyController extends Controller {
     public class ButtonAddSecurityForce implements EventHandler{
         @Override
         public void handle(Event event) {
-            //vacationModel.searchVacationsByUser_Id();
             window.close();
             mainController.activateAddSecurityForce();//
         }

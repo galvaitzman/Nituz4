@@ -1,25 +1,43 @@
 package Controllers;
 
 import Model.User;
-import Views.CreateEventView;
+import Views.AddSecurityForceView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 
 public class AddSecurityForceController extends Controller {
-    private CreateEventView createEventView;
+    private AddSecurityForceView addSecurityForceView;
+    private Map<Integer, String> eventsIDandTitle = new HashMap<>();
+    private int chosenEventID;
     public AddSecurityForceController(){
-        super("CreateEvent.fxml");
-        createEventView = fxmlLoader.getController();
+        super("AddSecurityForce.fxml");
+        addSecurityForceView = fxmlLoader.getController();
+        addSecurityForceView.start(new ButtonAddSecurityForce(), new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+                int index = (Integer) number2;
+                chosenEventID = Integer.parseInt(eventsIDandTitle.get(index));
+                addSecurityForceView.setOrganizations(eventModel.getSecurityForceToAdd(chosenEventID));
+            }
+        }
+        ,new ChangeListener<Number>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                String organization = addSecurityForceView.organizations.getItems().get((Integer) newValue).toString();
+                List<User> organizationUsers = userModel.getAllUsersFromOrganization(organization);
+                System.out.println(organization);
+                if (organizationUsers!=null) addSecurityForceView.setUsersFromOrganization(getOrganizationUsersByName(organizationUsers));
 
 
+            }
+        });
     }
 
     private List<String> getOrganizationUsersByName(List<User>organizationUsers ){
@@ -32,39 +50,47 @@ public class AddSecurityForceController extends Controller {
 
     @Override
     public void start() {
-        createEventView.setOrganizations(eventModel.getAllOrganization());
-        createEventView.setCategories(eventModel.getAllCategories());
-        window.setTitle("Create Vacation");
+        setEvents();
+        window.setTitle("Add Security Force");
         window.show();
     }
 
-
-    public class ButtonCreateEvent implements EventHandler {
-        @Override
-        public void handle(Event event) {
-            List<String>allCategories = new ArrayList<>();
-            for (int i=0; i<createEventView.selectedItems.getItems().size(); i++){
-                allCategories.add(createEventView.selectedItems.getItems().get(i));
+    public void setEvents(){
+        List<String > allEvents = eventModel.getAllEvents();
+        if (allEvents != null){
+            List<String> onlyTitles = new ArrayList<>();
+            int currentKey = 0;
+            for (int i=0; i<allEvents.size(); i+=2){
+                onlyTitles.add(allEvents.get(i+1));
+                eventsIDandTitle.put(currentKey,allEvents.get(i));
+                currentKey++;
             }
-
-            if (createEventView.isAllFieldsFull()){//new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()).toString(),
-                eventModel.insertEventToDB(createEventView.title.getText(),
-                        new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z").format(Calendar.getInstance().getTime()),
-                        createEventView.firstUpdate.getText(),
-                        "open",
-                        allCategories,"","");//createEventView.selectedItems.getItems()
-                window.close();
-                mainController.goBackToPreviousController();
-            }
-
+            addSecurityForceView.setEvents(onlyTitles);
+            window.setTitle("Add update");
+            window.show();
+        }
+        else{
+            alert("no available events");
+            mainController.goBackToPreviousController();
         }
     }
 
 
+    public class ButtonAddSecurityForce implements EventHandler {
+        @Override
+        public void handle(Event event) {
+            if (addSecurityForceView.isAllFieldsFull()){
+                eventModel.addSecurityForceToEvent(chosenEventID,
+                        addSecurityForceView.users.getValue().toString(),
+                        addSecurityForceView.organizations.getValue().toString(),
+                        addSecurityForceView.firstUpdate.getText());
+                window.close();
+                mainController.goBackToPreviousController();
+            }
+            else{
+                alert("all fields are required");
+            }
 
-
-
-
-
-
+        }
+    }
 }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CreateEventView extends AView{
+public class CreateEventView{
     @FXML
     public ChoiceBox organizations;
     public ChoiceBox users;
@@ -32,54 +32,6 @@ public class CreateEventView extends AView{
             ChangeListener changeListener) {
         organizations.getSelectionModel().selectedIndexProperty().addListener(changeListener);
         createEvent.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, buttonCreateEvent);
-        //ObservableList<String> sellAllTicketsItems = FXCollections.observableArrayList();
-        //ObservableList<String> vacationTypeItems = FXCollections.observableArrayList();
-        //ObservableList<String> ticketTypeItems = FXCollections.observableArrayList();
-        //ObservableList<String> connectionItems = FXCollections.observableArrayList();
-        //sellAllTicketsItems.add("Yes");
-        //sellAllTicketsItems.add("No");
-        //sellAllTickets.setItems(sellAllTicketsItems);
-        //vacationTypeItems.add("Urban");
-//        vacationTypeItems.add("Exotic");
-//        vacationType.setItems(vacationTypeItems);
-//        rankingOfStayingPlaceItems.add("5");
-//        rankingOfStayingPlaceItems.add("4");
-//        rankingOfStayingPlaceItems.add("3");
-//        rankingOfStayingPlaceItems.add("2");
-//        rankingOfStayingPlaceItems.add("1");
-//        stayingPlaceRanking.setItems(rankingOfStayingPlaceItems);
-
-//        connection2.setValue("");
-//        ticketType1.setItems(ticketTypeItems);
-//        ticketType2.setItems(ticketTypeItems);
-//        ticketType3.setItems(ticketTypeItems);
-//        ticketType4.setItems(ticketTypeItems);
-//        ticketType5.setItems(ticketTypeItems);
-//        ticketType2.setValue("Adult");
-//        ticketType3.setValue("Adult");
-//        ticketType4.setValue("Adult");
-//        ticketType5.setValue("Adult");
-//        numberOfTickets.setValue("1");
-//        connectionItems.add("Connection");
-//        connectionItems.add("Direct");
-//        connection1.setItems(connectionItems);
-//        connection2.setItems(connectionItems);
-//
-//        departure_time_2.setDisable(true);
-//        destination_time_2.setDisable(true);
-//        airLineName_2.setDisable(true);
-//        flight_number_2.setDisable(true);
-//        flight_baggage_2.setDisable(true);
-//        connection2.setDisable(true);
-//        departure_time_2.setText("");
-//        destination_time_2.setText("");
-//        airLineName_2.setText("");
-//        flight_number_2.setText("");
-//        flight_baggage_2.setText("");
-//        connection2.setValue("");
-
-//        staying_place_name.setText("none");
-//        stayingPlaceRanking.setValue("1");
         back.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED,new ButtonBack());
     }
 
@@ -130,7 +82,6 @@ public class CreateEventView extends AView{
                 title.getText().equals("") ||
                 organizations.getValue()==null ||
                 firstUpdate.getText().equals("")) {
-            alert("all fields are required");
             return false;
         }
         return true;

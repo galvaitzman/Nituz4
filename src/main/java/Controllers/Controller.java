@@ -10,6 +10,7 @@ import Model.EventModel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import sample.MainController;
 
@@ -50,6 +51,12 @@ public abstract class Controller {
         }
         catch (IOException e){
             e.printStackTrace();}
+    }
+
+    public void alert(String message){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }

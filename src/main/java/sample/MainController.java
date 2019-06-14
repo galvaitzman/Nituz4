@@ -23,7 +23,6 @@ public class MainController {
     }
 
     public void activeSignInSuccessfuly(){
-
         controllers.push(currentController);
         currentController = signInSuccessfulyController;
         currentController.start();
