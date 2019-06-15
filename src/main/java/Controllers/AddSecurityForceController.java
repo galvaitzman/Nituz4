@@ -23,18 +23,31 @@ public class AddSecurityForceController extends Controller {
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
                 int index = (Integer) number2;
                 chosenEventID = Integer.parseInt(eventsIDandTitle.get(index));
-                addSecurityForceView.setOrganizations(eventModel.getSecurityForceToAdd(chosenEventID));
+                List<String> allOrganizations = eventModel.getSecurityForceToAdd(chosenEventID);
+                if (allOrganizations != null){
+                    addSecurityForceView.setOrganizations(allOrganizations);
+                }
+                else{
+                    alert("all Security Forces are in this event. please choose another event");
+                    addSecurityForceView.setOrganizations(new ArrayList<>());
+                    addSecurityForceView.setUsersFromOrganization(new ArrayList<>());
+                }
+
             }
         }
         ,new ChangeListener<Number>(){
 
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                String organization = addSecurityForceView.organizations.getItems().get((Integer) newValue).toString();
-                List<User> organizationUsers = userModel.getAllUsersFromOrganization(organization);
-                System.out.println(organization);
-                if (organizationUsers!=null) addSecurityForceView.setUsersFromOrganization(getOrganizationUsersByName(organizationUsers));
-
+                if ((Integer)newValue != -1){
+                    String organization = addSecurityForceView.organizations.getItems().get((Integer) newValue).toString();
+                    List<User> organizationUsers = userModel.getAllUsersFromOrganization(organization);
+                    System.out.println(organization);
+                    if (organizationUsers!=null) addSecurityForceView.setUsersFromOrganization(getOrganizationUsersByName(organizationUsers));
+                }
+                else {
+                    addSecurityForceView.setUsersFromOrganization(new ArrayList<>());
+                }
 
             }
         });
@@ -80,9 +93,9 @@ public class AddSecurityForceController extends Controller {
         @Override
         public void handle(Event event) {
             if (addSecurityForceView.isAllFieldsFull()){
-                eventModel.addSecurityForceToEvent(chosenEventID,
-                        addSecurityForceView.users.getValue().toString(),
+                eventModel.makeNewEventAlarm(chosenEventID,
                         addSecurityForceView.organizations.getValue().toString(),
+                        addSecurityForceView.users.getValue().toString(),
                         addSecurityForceView.firstUpdate.getText());
                 window.close();
                 mainController.goBackToPreviousController();

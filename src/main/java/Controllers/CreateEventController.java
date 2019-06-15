@@ -58,13 +58,13 @@ public class CreateEventController extends Controller {
             }
 
             if (createEventView.isAllFieldsFull()){
-                eventModel.insertEventToDB(createEventView.title.getText(),
-                        new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z").format(Calendar.getInstance().getTime()),
+                eventModel.makeNewEvent(new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z").format(Calendar.getInstance().getTime()),
+                        createEventView.title.getText(),
                         createEventView.firstUpdate.getText(),
                         "open",
-                        allCategories,
                         createEventView.organizations.getValue().toString(),
-                        createEventView.users.getValue().toString());
+                        createEventView.users.getValue().toString(),
+                        allCategories);
                 window.close();
                 mainController.goBackToPreviousController();
             }

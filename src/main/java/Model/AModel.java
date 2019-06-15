@@ -75,31 +75,6 @@ public abstract class AModel {
         return null;
     }
 
-    public List<String> getAllEvents2(){
-        String sql = "SELECT * from UpdateInEvent";
-        List<String> orgDetails = new ArrayList<>();
-        try (Connection conn = this.connect();
-             PreparedStatement statement = conn.prepareStatement(sql)){
-            ResultSet rs = statement.executeQuery();
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int colCount = rsmd.getColumnCount();
-            while (rs.next())
-            {
-                for (int col=1; col <= colCount; col++)
-                {
-                    Object value = rs.getObject(col);
-                    if (value != null)
-                    {
-                        orgDetails.add(value.toString());
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        if(!orgDetails.isEmpty())
-            return orgDetails;
-        return null;
-    }
+
 
 }
