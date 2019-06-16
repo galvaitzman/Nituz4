@@ -26,6 +26,8 @@ public class AddSecurityForceView {
             AddSecurityForceController.ButtonAddSecurityForce buttonAddSecurityForce,
             ChangeListener changeListenerForEvents,
             ChangeListener changeListenerForOrganization) {
+        firstUpdate.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 255 ? change : null));
         events.getSelectionModel().selectedIndexProperty().addListener(changeListenerForEvents);
         organizations.getSelectionModel().selectedIndexProperty().addListener(changeListenerForOrganization);
         addSecurityForce.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, buttonAddSecurityForce);

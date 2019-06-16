@@ -50,11 +50,9 @@ public class AddUpdateController extends Controller {
         public void handle(Event event) {
 
             if (addUpdateView.isAllFieldsFull()){
-                if (addUpdateView.isAllFieldsFull()){
-                    eventModel.addUpdateToEvent(Integer.parseInt(eventsIDandTitle.get(addUpdateView.events.getSelectionModel().getSelectedIndex())),
+                eventModel.addUpdateToEvent(Integer.parseInt(eventsIDandTitle.get(addUpdateView.events.getSelectionModel().getSelectedIndex())),
                             new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z").format(Calendar.getInstance().getTime()),
                             addUpdateView.update.getText());
-                }
                 window.close();
                 mainController.goBackToPreviousController();
             }

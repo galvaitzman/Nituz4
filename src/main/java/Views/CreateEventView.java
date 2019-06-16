@@ -30,6 +30,8 @@ public class CreateEventView{
     public void start(
             CreateEventController.ButtonCreateEvent buttonCreateEvent,
             ChangeListener changeListener) {
+        firstUpdate.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 255 ? change : null));
         organizations.getSelectionModel().selectedIndexProperty().addListener(changeListener);
         createEvent.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, buttonCreateEvent);
         back.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED,new ButtonBack());

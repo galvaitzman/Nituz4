@@ -48,6 +48,7 @@ public abstract class AModel {
     }
 
 
+
     public List<String> getAllOrganization(){
         String sql = "SELECT * from Organizations";
         List<String> orgDetails = new ArrayList<>();

@@ -14,7 +14,18 @@ public class MainController {
     Controller addUpdateController = new AddUpdateController();
     Controller addSecurityForceController = new AddSecurityForceController();
     Stack<Controller> controllers = new Stack<Controller>();
-    public MainController () {
+
+
+    private static MainController mainController=null;
+
+    public static MainController getInstance(){
+        if (mainController == null){
+            mainController = new MainController();
+        }
+        return mainController;
+    }
+
+    private MainController () {
         Controller.setMainController(this);
         Controller.setMainUserModel();
         Controller.setMainEventModel();

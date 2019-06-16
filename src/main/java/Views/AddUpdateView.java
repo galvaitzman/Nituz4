@@ -19,6 +19,8 @@ public class AddUpdateView {
 
 
     public void start(AddUpdateController.ButtonAddUpdate  buttonAddUpdate) {
+        update.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 255 ? change : null));
         addUpdate.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, buttonAddUpdate);
         back.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED,new ButtonBack());
     }
@@ -31,11 +33,6 @@ public class AddUpdateView {
         }
     }
 
-
-
-
-
-
     public boolean isAllFieldsFull() {
 
         if (update.getText().equals("") || events.getValue()==null) {
@@ -43,6 +40,8 @@ public class AddUpdateView {
         }
         return true;
     }
+
+
 
 
 }
