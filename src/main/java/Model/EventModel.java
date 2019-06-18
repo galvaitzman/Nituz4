@@ -8,7 +8,7 @@ public class EventModel extends AModel {
 
 
     public void makeNewEvent(
-            String date,String title,String primaryUpdate, String status,String organization,String manager,List<String> categories) {
+            String date,String title,String primaryUpdate, String status,String organization,String managerName,List<String> categories) {
 
         String sql_eventID = "SELECT max(eventID) FROM Events";
         int eventID = 0;
@@ -21,7 +21,7 @@ public class EventModel extends AModel {
             System.out.println(e.getMessage());
             return;
         }
-
+        Event event = new Event(eventID,title,date,primaryUpdate,status,current_user.getuserName(),categories);
         String sql = "INSERT INTO Events(eventID," +
                 "title," +
                 "time," +
@@ -44,6 +44,7 @@ public class EventModel extends AModel {
 
 
         for( int i = 0; i <categories.size();i = i + 1) {
+            Category category = new Category(eventID,categories.get(i));
             String sql2 = "INSERT INTO CategoriesInEvent(eventID," +
                     "cat_name) VALUES(?,?)";
             try (Connection conn3 = connect();
@@ -57,11 +58,11 @@ public class EventModel extends AModel {
 
         }
 
-        makeNewEventAlarm(eventID,organization,manager,primaryUpdate);
+        makeNewEventAlarm(eventID,organization,managerName,primaryUpdate);
     }
 
-    public void makeNewEventAlarm(int eventID,String organization,String receiverName,String information){
-
+    public void makeNewEventAlarm(int eventID,String organization,String managerName,String primaryUpdate){
+        EventAlarm eventAlarm = new EventAlarm(eventID,primaryUpdate,current_user.getuserName(),managerName);
         String sqlmanager = "INSERT INTO ManagersInEvents(eventID," +
                 "reportTo," +
                 "org_name," +
@@ -70,10 +71,10 @@ public class EventModel extends AModel {
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sqlmanager)) {
             pstmt.setInt(1, eventID);
-            pstmt.setString(2, receiverName);
+            pstmt.setString(2, managerName);
             pstmt.setString(3, organization);
             pstmt.setString(4, current_user.getuserName());
-            pstmt.setString(5, information);
+            pstmt.setString(5, primaryUpdate);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -136,7 +137,7 @@ public class EventModel extends AModel {
             System.out.println(e.getMessage());
             return;
         }
-
+        Update update = new Update(current_user.getuserName(),date,originleUpdate,originleUpdate,upID);
         String sql = "INSERT INTO UpdateInEvent(upID," +
                 "eventID," +
                 "userName," +
